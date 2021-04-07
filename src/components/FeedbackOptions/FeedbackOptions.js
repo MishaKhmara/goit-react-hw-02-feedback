@@ -1,13 +1,13 @@
-const Options = ({ onGood, onNeutral, onBad }) => {
+const Options = ({ handleIncrement }) => {
   return (
     <section>
-      <button name="good" type="button" onClick={onGood}>
+      <button name="good" type="button" onClick={handleIncrement}>
         Good
       </button>
-      <button name="neutral" type="button" onClick={onNeutral}>
+      <button name="neutral" type="button" onClick={handleIncrement}>
         Neutral
       </button>
-      <button name="bad" type="button" onClick={onBad}>
+      <button name="bad" type="button" onClick={handleIncrement}>
         Bad
       </button>
     </section>

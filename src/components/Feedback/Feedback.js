@@ -1,29 +1,30 @@
-import React from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import Options from '../FeedbackOptions/FeedbackOptions';
 import Section from '../Section/Section';
 import Sections from '../Statistics/Statistics';
-class Feedback extends React.Component {
+
+class Feedback extends Component {
+  static propTypes = {
+    valueGood: PropTypes.number,
+    valueNeutral: PropTypes.number,
+    valueBad: PropTypes.number,
+  };
+
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
+  handleIncrement = event => {
+    const { name } = event.target;
+    this.setState(prevState => {
+      return {
+        [name]: prevState[name] + 1,
+      };
+    });
+  };
 
-  hendleGood = () => {
-    this.setState(prevState => ({
-      good: prevState.good + 1,
-    }));
-  };
-  hendleNeutral = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-  hendleBad = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
-  };
   countTotalFeedback = () =>
     this.state.good + this.state.neutral + this.state.bad;
 
@@ -35,23 +36,17 @@ class Feedback extends React.Component {
   render() {
     return (
       <div>
-        <h1>Please leave feedback</h1>
-        <Options
-          onGood={this.hendleGood}
-          onNeutral={this.hendleNeutral}
-          onBad={this.hendleBad}
-        />
-        <Section
-          title={'Statistics'}
-          children={
-            <Sections
-              Good={this.state.good}
-              Neutral={this.state.neutral}
-              Bad={this.state.bad}
-              Total={this.countTotalFeedback()}
-              feedback={this.countPositiveFeedbackPercentage()}
-            />
-          }
+        <Section title={'Please leave feedback'}>
+          <Options handleIncrement={this.handleIncrement} />
+        </Section>
+
+        <Section title={'Statistics'} />
+        <Sections
+          Good={this.state.good}
+          Neutral={this.state.neutral}
+          Bad={this.state.bad}
+          Total={this.countTotalFeedback()}
+          feedback={this.countPositiveFeedbackPercentage()}
         />
       </div>
     );
@@ -59,3 +54,19 @@ class Feedback extends React.Component {
 }
 
 export default Feedback;
+
+// hendleGood = () => {
+//   this.setState(prevState => ({
+//     good: prevState.good + 1,
+//   }));
+// };
+// hendleNeutral = () => {
+//   this.setState(prevState => ({
+//     neutral: prevState.neutral + 1,
+//   }));
+// };
+// hendleBad = () => {
+//   this.setState(prevState => ({
+//     bad: prevState.bad + 1,
+//   }));
+// };

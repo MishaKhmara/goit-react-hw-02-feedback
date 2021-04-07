@@ -1,4 +1,4 @@
-import Notification from './Notification';
+import Notification from '../Notification/Notification';
 
 const Statistics = ({ Good, Neutral, Bad, Total, feedback }) => {
   if (Total) {
