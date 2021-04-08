@@ -1,16 +1,26 @@
-const Options = ({ handleIncrement }) => {
+import PropTypes from 'prop-types';
+import css from './FeedbackOptions.module.css';
+const Options = ({ options, handleIncrement }) => {
   return (
     <section>
-      <button name="good" type="button" onClick={handleIncrement}>
-        Good
-      </button>
-      <button name="neutral" type="button" onClick={handleIncrement}>
-        Neutral
-      </button>
-      <button name="bad" type="button" onClick={handleIncrement}>
-        Bad
-      </button>
+      {options.map(option => (
+        <button
+          className={css.feedbackButton}
+          key={option}
+          name={option}
+          type="button"
+          onClick={handleIncrement}
+        >
+          {option}
+        </button>
+      ))}
     </section>
   );
 };
+
+Options.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleIncrement: PropTypes.func.isRequired,
+};
+
 export default Options;

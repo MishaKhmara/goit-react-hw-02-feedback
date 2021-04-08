@@ -1,21 +1,16 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import Options from '../FeedbackOptions/FeedbackOptions';
 import Section from '../Section/Section';
 import Sections from '../Statistics/Statistics';
 
 class Feedback extends Component {
-  static propTypes = {
-    valueGood: PropTypes.number,
-    valueNeutral: PropTypes.number,
-    valueBad: PropTypes.number,
-  };
-
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
+
   handleIncrement = event => {
     const { name } = event.target;
     this.setState(prevState => {
@@ -34,10 +29,14 @@ class Feedback extends Component {
     } else return 0;
   };
   render() {
+    console.log();
     return (
       <div>
         <Section title={'Please leave feedback'}>
-          <Options handleIncrement={this.handleIncrement} />
+          <Options
+            options={Object.keys(this.state)}
+            handleIncrement={this.handleIncrement}
+          />
         </Section>
 
         <Section title={'Statistics'} />
